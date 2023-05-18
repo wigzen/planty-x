@@ -107,11 +107,16 @@
   grid-template-columns: repeat(auto-fit, 400px); */
 
   display: flex;
-  gap: 1.5em;
+  gap: 1.4em;
   justify-content: center;
-  /* overflow-x: scroll; */
   /* overflow-y: hidden; */
   /* grid-template: 4/1; */
+}
+
+@media screen and (max-width: 1000px) {
+  .bestsellers__product {
+    overflow-x: scroll;
+  }
 }
 .bestseller__card {
   max-width: 600px;
@@ -142,7 +147,7 @@
   text-align: right;
 }
 .masonary-grid {
-  width: 100vw;
+  width: clac(100vw- 2.5rem);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -155,8 +160,8 @@
 }
 .second {
   /* width: 25%; */
-  position: absolute;
-  left: 25px;
+  /* position: absolute; */
+  /* left: 25px; */
 }
 .last {
   background-image: url('https://images.unsplash.com/photo-1569350080887-dd38c27caad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80');
