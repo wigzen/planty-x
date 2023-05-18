@@ -137,7 +137,7 @@
   /* grid-template: 4/1; */
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1250px) {
   .bestsellers__product {
     overflow-x: scroll;
   }
