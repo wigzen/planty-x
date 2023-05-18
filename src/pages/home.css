@@ -10,7 +10,7 @@
 .hero-img {
   width: 50%;
   height: 85vh;
-  max-height: 400px;
+  min-height: 400px;
 }
 .hero-img img {
   height: 100%;
