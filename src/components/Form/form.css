@@ -1,0 +1,38 @@
+.form,
+.addressForm {
+  /* background-color: aqua; */
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  padding: 0px 1em;
+}
+.form input,
+.addressForm input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #1d1d1d;
+}
+
+.form label,
+.addressForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.form___header {
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+.addressForm input {
+  margin: 0 auto;
+  width: 80%;
+}

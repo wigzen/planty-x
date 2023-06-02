@@ -1,0 +1,32 @@
+.carousel {
+  overflow: hidden;
+  width: 90vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-block: 2em;
+  height: 70vh;
+}
+.carousel-bg {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(237, 237, 237, 1) 50%
+  );
+}
+.carousel-text {
+  font-size: 2rem;
+  font-family: 'Lora', serif;
+}
+.carousel-control {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 1em;
+  width: 100%;
+}
+.carousel__img {
+  overflow-y: hidden;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+}

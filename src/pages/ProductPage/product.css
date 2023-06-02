@@ -1,0 +1,132 @@
+.item-contianer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+.productPage {
+  display: flex;
+  margin-block: 2em;
+  width: 100%;
+  gap: 1em;
+}
+.filterPanel {
+  /* justify-content: flex-start; */
+  border: solid;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 0.5em;
+  /* background-color: #747bff; */
+  /* width: ; */
+}
+.product__img {
+  width: 200px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.card {
+  width: 200px;
+  padding: 0.5em;
+
+  height: 300px;
+  background: #fafafa;
+  transition: all 0.4s;
+  /* border-radius: 10px; */
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+  /* font-size: 30px; */
+  font-weight: 900;
+  /* border: 1px solid black; */
+}
+.card img {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+  border-radius: 5px;
+  /* border: 1px solid black; */
+  /* margin: 2px; */
+  /* padding: 2px;
+  outline: 1px solid black; */
+}
+.first-content b {
+  text-overflow: ellipsis;
+}
+.card:hover {
+  /* border-radius: 15px; */
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+  /* background: rgb(103, 151, 255); */
+}
+
+.first-content {
+  /* padding: 0.5em; */
+  height: 100%;
+  width: 100%;
+  transition: all 0.4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 1;
+  /* border-radius: 15px; */
+}
+
+.card:hover .first-content {
+  height: 0px;
+  opacity: 0;
+}
+
+.second-content {
+  height: 0%;
+  width: 100%;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 15px; */
+  transition: all 0.4s;
+  font-size: 0px;
+  transform: rotate(90deg) scale(-1);
+}
+
+.card:hover .second-content {
+  opacity: 1;
+  height: 100%;
+  font-size: 1.5rem;
+  transform: rotate(0deg);
+}
+
+.card__btn {
+  /* border-radius: ; */
+  border: 1px solid transparent;
+  background-color: black;
+  color: white;
+  padding: 1em 1.5em;
+  border-radius: 50px;
+  transition: all ease-in 0.2s;
+}
+
+.card__btn:hover {
+  background-color: white;
+  color: #000000;
+  border: 1px solid black;
+}
+
+.flex {
+  display: flex;
+}
+
+.filterPanel b {
+  font-weight: 900;
+  background-color: #000000;
+  color: white;
+  font-size: 0.8em;
+  padding: 0.5em;
+}
+
+.filterPanel input {
+  font-weight: 900;
+}
