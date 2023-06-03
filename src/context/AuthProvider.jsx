@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
       setIslogedIn(true)
       getData()
     } catch (err) {
-      console.log(err)
+      console.log(err.code)
     }
   }
 
@@ -60,7 +60,11 @@ const AuthProvider = ({ children }) => {
         email: signupDetails.email,
         cart: [],
         wishlist: [],
-        address: [],
+        address: [
+          {
+            name: '',
+          },
+        ],
       })
       //   collection(db, `users/${Auth.currentUser.uid}/cart`)
       setIslogedIn(true)
@@ -95,7 +99,7 @@ const AuthProvider = ({ children }) => {
       //   localdb.setItem(' userDetails', JSON.stringify(data.data()))
     } catch (err) {
       // console.log('error hai neche wala')
-      console.log(err)
+      console.log(err.code)
     }
   }
 
@@ -120,7 +124,7 @@ const AuthProvider = ({ children }) => {
     })
     // const token = localdb.getItem('tokenID')
     getData()
-  }, [userData, islogedin])
+  }, [userData])
   return (
     <AuthContext.Provider
       value={{

@@ -17,7 +17,7 @@ const Checkout = () => {
   const DELIVERY_CHARGE = 50
   const DISCOUNT = 10
   console.log(addresss)
-  const deliveryAddress = addresss[selectedAddress]
+  const deliveryAddress = addresss[selectedAddress] || { name: '' }
   return (
     <section className="checkout">
       <div className="address">

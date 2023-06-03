@@ -11,11 +11,13 @@ import { useModal } from '../../hooks/useModal'
 import Modal from '../Modal/Modal'
 import Forms from '../Form/Forms'
 import { DataContext } from '../../context/DataProvider'
+import { AuthContext } from '../../context/AuthProvider'
 const Navbar = () => {
   const { modalOpen: serachOpen, close, open } = useModal()
   const [isSearch, setisSearch] = useState(false)
   const [isFormOpen, setisForm] = useState(false)
   const { handleFilters } = useContext(DataContext)
+  const { islogedin } = useContext(AuthContext)
   const navigate = useNavigate()
   function handleClick(type) {
     handleFilters({ type: 'CATEGORY', payload: '' })
@@ -98,9 +100,13 @@ const Navbar = () => {
         </li>
 
         <li className="navbar__icon">
-          <Link to="/cart">
-            <HiOutlineShoppingCart size={18} />
-          </Link>
+          {islogedin ? (
+            <Link to="/cart">
+              <HiOutlineShoppingCart size={18} />
+            </Link>
+          ) : (
+            <HiOutlineShoppingCart size={18} onClick={'SHoow Toast'} />
+          )}
         </li>
         <li
           className="navbar__icon"

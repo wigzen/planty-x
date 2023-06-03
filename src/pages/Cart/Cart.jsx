@@ -7,6 +7,7 @@ import { RxCrossCircled } from 'react-icons/rx'
 
 import './cart.css'
 import { CartPrice } from '../../components'
+import { AuthContext } from '../../context/AuthProvider'
 const Cart = () => {
   const { cart, handleCart } = useContext(CartContext)
   const { wishList, handleWishList } = useContext(WishContext)
@@ -15,7 +16,7 @@ const Cart = () => {
   //   return price * count + acc
   // }, 0)
   // const discount = 0
-
+  const { islogedin } = useContext(AuthContext)
   console.log(cart)
   return (
     <section className="cartpage">

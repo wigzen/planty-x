@@ -34,6 +34,7 @@ const Wishlist = () => {
               <p>Price : {ele.price}</p>
               <p>Level: {ele.level}</p>
               <button
+                className="btn"
                 onClick={() => {
                   handleAddtoCart(ele)
                 }}
@@ -42,6 +43,7 @@ const Wishlist = () => {
                 Add to Cart{' '}
               </button>{' '}
               <button
+                className="btn"
                 onClick={() => {
                   handleWishList({ type: 'REMOVE', payload: ele })
                 }}

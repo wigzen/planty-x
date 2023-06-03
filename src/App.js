@@ -1,7 +1,7 @@
 import './App.css'
 // import Mockman from 'mockman-js'
 import { Routes, Route } from 'react-router-dom'
-import { Footer, Forms, Navbar } from './components'
+import { Footer, Forms, Navbar, RequireAuth } from './components'
 import { Cart, Checkout, Home, ProductPage, WishList } from './pages'
 
 function App() {
@@ -17,8 +17,22 @@ function App() {
           element={<ProductDetails />}
         /> */}
 
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/wishlist" element={<WishList />} />
+        <Route
+          path="/cart"
+          element={
+            <RequireAuth>
+              <Cart />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <RequireAuth>
+              <WishList />
+            </RequireAuth>
+          }
+        />
         <Route path="/auth" element={<Forms />} />
         <Route path="/checkout" element={<Checkout />} />
         {/* <Route path="/mock" element={<Mockman />} /> */}

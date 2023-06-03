@@ -5,8 +5,10 @@ import { collection, doc, setDoc, getDoc, getDocs } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, db } from '../../config/firebase'
 import { AuthContext } from '../../context/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 // import { AuthContext } from '../context/AuthProvider'
 import './form.css'
+import { paste } from '@testing-library/user-event/dist/paste'
 const SignUp = () => {
   const { handleSignup, signupDetails, setsignupDetails } =
     useContext(AuthContext)
@@ -70,9 +72,16 @@ const SignUp = () => {
 }
 
 const Login = () => {
+  // const navigate = useNavigate()
   const { handleLogin, loginDetails, setloginDetails } = useContext(AuthContext)
   return (
-    <form className="form" onSubmit={handleLogin}>
+    <form
+      className="form"
+      onSubmit={
+        handleLogin
+        // navigate('/')
+      }
+    >
       <h1 className="form___header"> Login</h1>
       <label htmlFor="login__email">
         E-mail
@@ -98,6 +107,18 @@ const Login = () => {
         />
       </label>
       <button className="btn"> Submit</button>
+      <p
+        role="button"
+        type="submit"
+        onClick={() => {
+          setloginDetails({
+            email: 'wigzen18@gmail.com',
+            password: 'Admin@321',
+          })
+        }}
+      >
+        Login as Guest
+      </p>
     </form>
   )
 }
