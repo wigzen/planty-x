@@ -1,6 +1,10 @@
 import React, { useContext } from 'react'
 import { WishContext } from '../../context/WishProvider'
 import { CartContext } from '../../context/CartProvider'
+import './wishlist.css'
+import Lottie from 'lottie-react'
+import { toast } from 'react-hot-toast'
+import preloader from '../../assets/preloader.json'
 const Wishlist = () => {
   const { wishList, handleWishList } = useContext(WishContext)
   const { cart, handleCart } = useContext(CartContext)
@@ -13,49 +17,54 @@ const Wishlist = () => {
     }
   }
   return (
-    <section className="item-contianer">
-      {!wishList ? (
-        <p aria-busy="true"> wewe</p>
-      ) : (
-        wishList.map((ele) => {
-          return (
-            <div
-              style={{
-                border: '1px solid black',
-                width: '300px',
-                padding: '1em',
-              }}
-            >
-              <p>
-                Name:
-                {ele.name}
-              </p>
-              <p>Rating : {ele.ratings}</p>
-              <p>Price : {ele.price}</p>
-              <p>Level: {ele.level}</p>
-              <button
-                className="btn"
-                onClick={() => {
-                  handleAddtoCart(ele)
-                }}
-              >
-                {' '}
-                Add to Cart{' '}
-              </button>{' '}
-              <button
-                className="btn"
-                onClick={() => {
-                  handleWishList({ type: 'REMOVE', payload: ele })
-                }}
-              >
-                {' '}
-                Remove{' '}
-              </button>
-            </div>
+    <>
+      <h1 className="page-header"> Wishlist</h1>
+      <section className=" wishlist item-contianer ">
+        {!wishList.length ? (
+          wishList ? (
+            <Lottie animationData={preloader} />
+          ) : (
+            <>NO data</>
           )
-        })
-      )}
-    </section>
+        ) : (
+          wishList.map((ele) => {
+            return (
+              <div className="wishlist-card">
+                <img src={ele.src} alt={ele.name} />
+                <h3>
+                  Name:
+                  {ele.name}
+                </h3>
+                {/* <p> Descripation: {ele.description}</p> */}
+                <h4>Rating : {ele.ratings}</h4>
+                <h4>Price : {ele.price}</h4>
+                {/* <p>Level: {ele.level}</p> */}
+                <div className="btn-grp">
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      handleAddtoCart(ele)
+                      toast.success('Added to Cart')
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      handleWishList({ type: 'REMOVE', payload: ele })
+                      toast.error('Removed form Wishlist')
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            )
+          })
+        )}
+      </section>
+    </>
   )
 }
 

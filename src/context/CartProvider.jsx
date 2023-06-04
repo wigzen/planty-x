@@ -14,7 +14,7 @@ function reducer(state, action) {
         return action.payload
 
       case 'INCREMENT':
-        console.log('increment run')
+        // console.log('increment run')
 
         const newCart = state.map((item) =>
           item._id === action.payload

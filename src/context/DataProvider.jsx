@@ -42,13 +42,14 @@ function reducer(state, action) {
 
 const DataProvider = ({ children }) => {
   const [data, setData] = useState([])
-
+  const [loader, setLoader] = useState(false)
   useEffect(() => {
     let isMounted = true
-
+    setLoader(true)
     async function getData() {
       const ProductsRef = collection(db, 'products')
       const productsSnap = await getDocs(ProductsRef)
+      setLoader(false)
       productsSnap.forEach((product) => {
         if (isMounted) {
           setData((prev) => {
@@ -57,8 +58,8 @@ const DataProvider = ({ children }) => {
         }
       })
     }
-    getData()
 
+    getData()
     return () => {
       isMounted = false
     }
@@ -68,7 +69,12 @@ const DataProvider = ({ children }) => {
   return (
     <>
       <DataContext.Provider
-        value={{ handleFilters: dispatch, filters: state, products: data }}
+        value={{
+          handleFilters: dispatch,
+          filters: state,
+          products: data,
+          loader,
+        }}
       >
         {children}
       </DataContext.Provider>

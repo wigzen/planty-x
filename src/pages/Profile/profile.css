@@ -1,0 +1,42 @@
+.profile {
+  display: flex;
+  /* flex-direction: column; */
+  width: 50%;
+  justify-content: space-around;
+  align-items: start;
+  /* border: 1px solid; */
+  margin: 1em auto;
+  padding: 1em;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.13);
+}
+.address-card {
+  position: relative;
+  margin: 1em 0;
+  border: 1px solid;
+  padding: 1em;
+  max-width: 200px;
+  border-radius: 1em;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon-div {
+  /* position: absolute; */
+  right: 0;
+  top: 0;
+}
+.sub-header {
+  font-weight: 900;
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+}
+
+.profile p {
+  text-align: start;
+  line-height: 1.2;
+  /* margin: 0.4em 0; */
+}

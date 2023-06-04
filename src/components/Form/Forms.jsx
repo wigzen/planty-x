@@ -8,7 +8,9 @@ import { AuthContext } from '../../context/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 // import { AuthContext } from '../context/AuthProvider'
 import './form.css'
-import { paste } from '@testing-library/user-event/dist/paste'
+// import { paste } from '@testing-library/user-event/dist/paste'
+import { toast } from 'react-hot-toast'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 const SignUp = () => {
   const { handleSignup, signupDetails, setsignupDetails } =
     useContext(AuthContext)
@@ -66,12 +68,30 @@ const SignUp = () => {
           }}
         />
       </label>
+      <label htmlFor="login__password" className="">
+        Confirm Password
+        <br />
+        <input
+          type="password"
+          // id="login__password"
+          value={signupDetails.password}
+          onChange={(e) => {
+            setsignupDetails((prev) => ({
+              ...prev,
+              c_password: e.target.value,
+            }))
+          }}
+        />
+        <AiOutlineEye size={16} />
+        {/* <AiOutlineEyeInvisible size={16} /> */}
+      </label>
       <button className="btn"> Submit</button>
     </form>
   )
 }
 
 const Login = () => {
+  const notify = () => toast.success('Login Done')
   // const navigate = useNavigate()
   const { handleLogin, loginDetails, setloginDetails } = useContext(AuthContext)
   return (
@@ -101,12 +121,15 @@ const Login = () => {
         <input
           type="password"
           id="login__password"
+          value={loginDetails.password}
           onChange={(e) => {
             setloginDetails((prev) => ({ ...prev, password: e.target.value }))
           }}
         />
       </label>
-      <button className="btn"> Submit</button>
+      <button className="btn" onClick={notify}>
+        Submit
+      </button>
       <p
         role="button"
         type="submit"
@@ -147,14 +170,6 @@ const Forms = () => {
       >
         {login ? 'signup' : 'login'}
       </p>
-
-      <button
-        onClick={handleLogout}
-        style={{ background: islogedin ? 'green' : 'red' }}
-      >
-        {' '}
-        Logout
-      </button>
     </div>
   )
 }

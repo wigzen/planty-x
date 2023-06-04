@@ -15,6 +15,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth'
+import { toast } from 'react-hot-toast'
 
 export const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
@@ -24,6 +25,7 @@ const AuthProvider = ({ children }) => {
     lastName: '',
     email: '',
     password: '',
+    c_password: ' ',
   })
 
   const [addresss, setAddresss] = useState([])
@@ -80,6 +82,7 @@ const AuthProvider = ({ children }) => {
     // console.log('start')
     try {
       await signOut(auth)
+      toast.success('Logout Successful')
       setIslogedIn(false)
     } catch (err) {
       console.log(err)
@@ -124,7 +127,7 @@ const AuthProvider = ({ children }) => {
     })
     // const token = localdb.getItem('tokenID')
     getData()
-  }, [userData])
+  }, [islogedin])
   return (
     <AuthContext.Provider
       value={{

@@ -12,6 +12,7 @@ import Modal from '../Modal/Modal'
 import Forms from '../Form/Forms'
 import { DataContext } from '../../context/DataProvider'
 import { AuthContext } from '../../context/AuthProvider'
+import { toast } from 'react-hot-toast'
 const Navbar = () => {
   const { modalOpen: serachOpen, close, open } = useModal()
   const [isSearch, setisSearch] = useState(false)
@@ -93,10 +94,20 @@ const Navbar = () => {
         >
           <FiSearch size={18} />
         </li>
+
         <li className="navbar__icon">
-          <Link to="/wishlist">
-            <FiHeart size={18} />
-          </Link>
+          {islogedin ? (
+            <Link to="/cart">
+              <FiHeart size={18} />
+            </Link>
+          ) : (
+            <FiHeart
+              size={18}
+              onClick={() => {
+                toast.error('Please Login')
+              }}
+            />
+          )}
         </li>
 
         <li className="navbar__icon">
@@ -105,15 +116,24 @@ const Navbar = () => {
               <HiOutlineShoppingCart size={18} />
             </Link>
           ) : (
-            <HiOutlineShoppingCart size={18} onClick={'SHoow Toast'} />
+            <HiOutlineShoppingCart
+              size={18}
+              onClick={() => {
+                toast.error('Please Login')
+              }}
+            />
           )}
         </li>
         <li
           className="navbar__icon"
           onClick={() => {
-            serachOpen ? close() : open()
-            setisForm(true)
-            setisSearch(false)
+            if (islogedin) {
+              navigate('/profile')
+            } else {
+              serachOpen ? close() : open()
+              setisForm(true)
+              setisSearch(false)
+            }
           }}
         >
           {/* <Link to="/auth"> */}

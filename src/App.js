@@ -3,43 +3,50 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import { Footer, Forms, Navbar, RequireAuth } from './components'
 import { Cart, Checkout, Home, ProductPage, WishList } from './pages'
-
+import { Toaster } from 'react-hot-toast'
+import Profile from './pages/Profile/Profile'
+import Lottie from 'lottie-react'
+import preloader from './assets/preloader.json'
+import { useContext } from 'react'
+import { DataContext } from './context/DataProvider'
 function App() {
+  const { loader } = useContext(DataContext)
   return (
-    <div className="App">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductPage />} />
-        {/* <Route
-          exact
-          path={'/products/:productID'}
-          element={<ProductDetails />}
-        /> */}
-
-        <Route
-          path="/cart"
-          element={
-            <RequireAuth>
-              <Cart />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/wishlist"
-          element={
-            <RequireAuth>
-              <WishList />
-            </RequireAuth>
-          }
-        />
-        <Route path="/auth" element={<Forms />} />
-        <Route path="/checkout" element={<Checkout />} />
-        {/* <Route path="/mock" element={<Mockman />} /> */}
-      </Routes>
-      {/* <Forms /> */}
-      <Footer />
-    </div>
+    <>
+      {loader ? (
+        <Lottie animationData={preloader} />
+      ) : (
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/wishlist"
+              element={
+                // <RequireAuth>
+                <WishList />
+                // </RequireAuth>
+              }
+            />
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/auth" element={<Forms />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+          {/* <Forms /> */}
+          <Footer />
+          <Toaster
+            toastOptions={{
+              style: {
+                fontSize: '1.5rem',
+                fontWeight: '900',
+              },
+            }}
+          />
+        </div>
+      )}
+    </>
   )
 }
 

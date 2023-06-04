@@ -7,12 +7,15 @@ import './product.css'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useModal } from '../../hooks/useModal'
 import { Modal, ProductDetails } from '../../components'
+import { toast } from 'react-hot-toast'
+
 const Product = () => {
   const { products, filters, handleFilters } = useContext(DataContext)
   const { cart, handleCart } = useContext(CartContext)
   const { wishList, handleWishList } = useContext(WishContext)
   const [currentProduct, setCurrentProduct] = useState({})
   const [range, setRange] = useState(0)
+
   const { modalOpen, close, open } = useModal()
   function applyFilters() {
     let updatedData = products
@@ -191,7 +194,7 @@ const Product = () => {
                         )
                       )}
                   </div>
-                  <p>Rating : {ele.ratings}</p>
+                  {/* <p>Rating : {ele.ratings}</p> */}
                   <p>Price : {ele.price}</p>
                   <p>Category: {ele.category}</p>
                 </div>
@@ -200,6 +203,7 @@ const Product = () => {
                     <button
                       onClick={(e) => {
                         handleAddtoCart(ele)
+                        toast.success(' Added to Cart ')
                         e.stopPropagation()
                       }}
                       className="card__btn"
@@ -223,6 +227,7 @@ const Product = () => {
                     <button
                       onClick={(e) => {
                         handleWishList({ type: 'ADD', payload: ele })
+                        toast.success(' Added to WishList ')
                         e.stopPropagation()
                       }}
                       className="card__btn"
