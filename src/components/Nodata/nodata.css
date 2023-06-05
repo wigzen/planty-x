@@ -1,0 +1,17 @@
+.nodata__header {
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 900;
+  font-family: 'Belleza', sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin: 1em;
+}
+.nodata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nodata .btn {
+  font-size: 2rem;
+}

@@ -10,7 +10,7 @@ function reducer(state, action) {
     const docRef = doc(db, 'users', `${auth.currentUser.uid}`)
     switch (action.type) {
       case 'SETCART':
-        console.log(action.payload)
+        // console.log(action.payload)
         return action.payload
 
       case 'INCREMENT':
@@ -27,7 +27,7 @@ function reducer(state, action) {
         return newCart
       case 'DECREMENT':
         {
-          console.log('decrement run')
+          // console.log('decrement run')
           const newCart = state.map((item) =>
             item._id === action.payload && item.count > 0
               ? { ...item, count: item.count-- }

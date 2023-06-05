@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import {
   collection,
   doc,
@@ -7,6 +8,7 @@ import {
   getDocs,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth, db } from '../config/firebase'
@@ -57,6 +59,7 @@ const AuthProvider = ({ children }) => {
         signupDetails.password
       )
       await setDoc(doc(db, 'users', auth.currentUser.uid), {
+        _id: uuidv4(),
         firstName: signupDetails.firstName,
         lastName: signupDetails.lastName,
         email: signupDetails.email,
@@ -64,7 +67,13 @@ const AuthProvider = ({ children }) => {
         wishlist: [],
         address: [
           {
-            name: '',
+            name: `${signupDetails.firstName} ${signupDetails.lastName}`,
+            city: 'Toronto',
+            country: 'Latina',
+            pincode: '500012',
+            state: 'Ohio',
+            mobile: '8984418719',
+            street: '1987,Jerbai Wadia Road ',
           },
         ],
       })
@@ -97,9 +106,9 @@ const AuthProvider = ({ children }) => {
       // console.log('Runs')
       // console.log(data.data())
       setUserData(() => {
+        localStorage.setItem(' userDetails', JSON.stringify(data.data()))
         return data.data()
       })
-      //   localdb.setItem(' userDetails', JSON.stringify(data.data()))
     } catch (err) {
       // console.log('error hai neche wala')
       console.log(err.code)
@@ -108,26 +117,65 @@ const AuthProvider = ({ children }) => {
 
   async function addAddress(addressData) {
     const docRef = doc(db, 'users', `${auth.currentUser.uid}`)
-    updateDoc(docRef, {
-      address: arrayUnion(addressData),
+    const addressWithId = { ...addressData, _id: uuidv4() }
+    setAddresss((prev) => {
+      if (prev) {
+        return [...prev, addressWithId]
+      }
+      return [addressWithId]
     })
+    await updateDoc(docRef, {
+      address: arrayUnion(addressWithId),
+    })
+    toast.success('Address Added')
   }
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid
-        setIslogedIn(true)
-        setAddresss(userData.address || [])
-        console.log({ uid, status: 'Logedin', userData })
-        // ...
+  async function removeAddress(addressData) {
+    const docRef = doc(db, 'users', `${auth.currentUser.uid}`)
+
+    await updateDoc(docRef, {
+      address: arrayRemove(addressData),
+    })
+    setAddresss(() => addresss.filter((item) => item._id !== addressData._id))
+    toast.error('Address Removed')
+  }
+  async function updateAddress(ID, editedAdd) {
+    const newAddress = addresss.map((ele) => {
+      if (ele._id === ID) {
+        return { ...ele, ...editedAdd }
       } else {
-        setIslogedIn(false)
-        console.log({ status: 'LogedOut' })
+        return ele
       }
     })
-    // const token = localdb.getItem('tokenID')
-    getData()
-  }, [islogedin])
+    const docRef = doc(db, 'users', `${auth.currentUser.uid}`)
+    await updateDoc(docRef, {
+      address: newAddress,
+    })
+    setAddresss(() => newAddress)
+    toast.success('Address Updated')
+  }
+  useEffect(() => {
+    if (!addresss.length > 0) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const uid = user.uid
+          setIslogedIn(true)
+          getData()
+          console.log(userData.address, addresss, '<-- firebase addres')
+          setAddresss(userData.address ?? [])
+          console.log({ uid, status: 'Logedin', user: user })
+
+          // ...
+        } else {
+          setIslogedIn(false)
+          console.log({ status: 'LogedOut' })
+        }
+      })
+      // const token = localdb.getItem('tokenID')
+      getData()
+    }
+  }, [userData, islogedin])
+  console.log(addresss, '<--address Auth')
+
   return (
     <AuthContext.Provider
       value={{
@@ -144,6 +192,8 @@ const AuthProvider = ({ children }) => {
         getData,
         addAddress,
         addresss,
+        removeAddress,
+        updateAddress,
       }}
     >
       {children}

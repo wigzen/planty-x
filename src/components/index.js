@@ -6,6 +6,7 @@ import { Carousel } from './Carousel/Carousel'
 import CartPrice from './CartPrice/CartPrice'
 import ProductDetails from './ProductDetails/ProductDetails'
 import Forms from './Form/Forms'
+import Nodata from './Nodata/Nodata'
 import RequireAuth from './RequireAuth/RequireAuth'
 export {
   Navbar,
@@ -17,4 +18,5 @@ export {
   ProductDetails,
   Forms,
   RequireAuth,
+  Nodata,
 }

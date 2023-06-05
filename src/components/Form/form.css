@@ -13,7 +13,7 @@
 }
 .form input,
 .addressForm input {
-  width: 100%;
+  /* width: 100%; */
   padding: 0.5rem 1rem;
   border-radius: 5px;
   outline: none;
@@ -22,9 +22,15 @@
 
 .form label,
 .addressForm label {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+}
+.password__icon {
+  position: absolute;
+  right: 0.625em;
+  bottom: 0.5em;
 }
 
 .form___header {

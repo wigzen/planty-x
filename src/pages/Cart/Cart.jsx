@@ -8,7 +8,7 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { RxCrossCircled } from 'react-icons/rx'
 
 import './cart.css'
-import { CartPrice } from '../../components'
+import { CartPrice, Nodata } from '../../components'
 import { AuthContext } from '../../context/AuthProvider'
 import { toast } from 'react-hot-toast'
 const Cart = () => {
@@ -20,7 +20,7 @@ const Cart = () => {
   // }, 0)
   // const discount = 0
   const { islogedin } = useContext(AuthContext)
-  console.log(cart)
+  // console.log(cart)
   return (
     <>
       <h1 className="page-header"> Cart</h1>
@@ -28,7 +28,7 @@ const Cart = () => {
         <section className="cart-contianer">
           {!cart.length ? (
             <>
-              <Lottie animationData={preloader} />
+              <Nodata page={'Cart'} />
             </>
           ) : (
             cart.map((ele) => {
@@ -39,7 +39,7 @@ const Cart = () => {
                     className="close__btn"
                     onClick={() => {
                       handleCart({ type: 'REMOVE', payload: ele })
-                      toast.error(' Added to Cart ')
+                      toast.error(' Removed form cart ')
                     }}
                   />
                   <img

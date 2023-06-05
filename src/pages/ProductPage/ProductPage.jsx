@@ -8,6 +8,7 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useModal } from '../../hooks/useModal'
 import { Modal, ProductDetails } from '../../components'
 import { toast } from 'react-hot-toast'
+import { AuthContext } from '../../context/AuthProvider'
 
 const Product = () => {
   const { products, filters, handleFilters } = useContext(DataContext)
@@ -69,6 +70,7 @@ const Product = () => {
       handleCart({ type: 'ADD', payload: newItem })
     }
   }
+  const { islogedin } = useContext(AuthContext)
   const filteredData = applyFilters()
 
   return (
@@ -202,9 +204,14 @@ const Product = () => {
                   {!cart?.find((item) => item._id === ele._id) ? (
                     <button
                       onClick={(e) => {
-                        handleAddtoCart(ele)
-                        toast.success(' Added to Cart ')
-                        e.stopPropagation()
+                        if (islogedin) {
+                          handleAddtoCart(ele)
+                          toast.success(' Added to Cart ')
+                          e.stopPropagation()
+                        } else {
+                          e.stopPropagation()
+                          toast.error(' Please Login ')
+                        }
                       }}
                       className="card__btn"
                     >
@@ -226,9 +233,15 @@ const Product = () => {
                   {!wishList?.find((item) => item._id === ele._id) ? (
                     <button
                       onClick={(e) => {
-                        handleWishList({ type: 'ADD', payload: ele })
-                        toast.success(' Added to WishList ')
-                        e.stopPropagation()
+                        if (islogedin) {
+                          handleWishList({ type: 'ADD', payload: ele })
+                          toast.success(' Added to WishList ')
+                          e.stopPropagation()
+                        } else {
+                          e.stopPropagation()
+
+                          toast.error('Please Login')
+                        }
                       }}
                       className="card__btn"
                     >

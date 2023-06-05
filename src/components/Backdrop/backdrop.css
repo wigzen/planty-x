@@ -6,7 +6,7 @@
   width: 100%;
   background: rgba(0, 0, 0, 0.8823529411764706);
   justify-content: center;
-  overflow: hidden;
+  /* overflow: hidden; */
   z-index: 4;
 }
 .backdrop {

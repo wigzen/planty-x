@@ -15,10 +15,10 @@ const SignUp = () => {
   const { handleSignup, signupDetails, setsignupDetails } =
     useContext(AuthContext)
 
-  const collectionRef = collection(db, 'users')
+  // const collectionRef = collection(db, 'users')
 
   console.log('signup')
-
+  const [showpassword, setShowpassword] = useState(false)
   console.log(signupDetails)
 
   return (
@@ -60,19 +60,32 @@ const SignUp = () => {
         Password
         <br />
         <input
-          type="password"
+          type={showpassword ? 'text' : 'password'}
           id="login__password"
           value={signupDetails.password}
           onChange={(e) => {
             setsignupDetails((prev) => ({ ...prev, password: e.target.value }))
           }}
         />
+        {showpassword ? (
+          <AiOutlineEyeInvisible
+            size={16}
+            className="password__icon"
+            onClick={() => setShowpassword((prev) => !prev)}
+          />
+        ) : (
+          <AiOutlineEye
+            className="password__icon"
+            size={16}
+            onClick={() => setShowpassword((prev) => !prev)}
+          />
+        )}
       </label>
       <label htmlFor="login__password" className="">
         Confirm Password
         <br />
         <input
-          type="password"
+          type={showpassword ? 'text' : 'password'}
           // id="login__password"
           value={signupDetails.password}
           onChange={(e) => {
@@ -82,7 +95,19 @@ const SignUp = () => {
             }))
           }}
         />
-        <AiOutlineEye size={16} />
+        {showpassword ? (
+          <AiOutlineEyeInvisible
+            size={16}
+            className="password__icon"
+            onClick={() => setShowpassword((prev) => !prev)}
+          />
+        ) : (
+          <AiOutlineEye
+            className="password__icon"
+            size={16}
+            onClick={() => setShowpassword((prev) => !prev)}
+          />
+        )}
         {/* <AiOutlineEyeInvisible size={16} /> */}
       </label>
       <button className="btn"> Submit</button>
@@ -159,9 +184,9 @@ const Forms = () => {
   // userDetails = userData
   return (
     <div className="form ">
-      <h1 style={{ background: islogedin ? 'green' : 'red' }}>
+      {/* <h1 style={{ background: islogedin ? 'green' : 'red' }}>
         {userData?.firstName}
-      </h1>
+      </h1> */}
       {login ? <Login /> : <SignUp />}
       <p
         onClick={() => {
@@ -175,24 +200,31 @@ const Forms = () => {
 }
 
 export default Forms
-export const Address = () => {
-  const { addAddress } = useContext(AuthContext)
-  const [addressData, setAddressData] = useState({
-    name: '',
-    street: '',
-    city: '',
-    pincode: '',
-    state: '',
-    country: '',
-    mobile: '',
-  })
+export const Address = ({ ID, state, update }) => {
+  const { addAddress, updateAddress } = useContext(AuthContext)
+  const [addressData, setAddressData] = useState(
+    state ?? {
+      name: '',
+      street: '',
+      city: '',
+      pincode: '',
+      state: '',
+      country: '',
+      mobile: '',
+    }
+  )
   return (
     <form
       className=" addressForm"
       onSubmit={(e) => {
         e.preventDefault()
-        console.log(addressData)
-        addAddress(addressData)
+
+        if (update) {
+          updateAddress(ID, addressData)
+        } else {
+          console.log(addressData)
+          addAddress(addressData)
+        }
       }}
     >
       <h1 className="checkout__header"> Add New Address </h1>
@@ -200,6 +232,7 @@ export const Address = () => {
         Name
         <input
           type="text"
+          value={addressData.name}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, name: e.target.value }))
           }}
@@ -208,6 +241,7 @@ export const Address = () => {
       <label>
         Street
         <input
+          value={addressData.street}
           type="text"
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, street: e.target.value }))
@@ -218,6 +252,7 @@ export const Address = () => {
         City
         <input
           type="text"
+          value={addressData.city}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, city: e.target.value }))
           }}
@@ -227,6 +262,7 @@ export const Address = () => {
         Pincode
         <input
           type="text"
+          value={addressData.pincode}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, pincode: e.target.value }))
           }}
@@ -236,6 +272,7 @@ export const Address = () => {
         State
         <input
           type="text"
+          value={addressData.state}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, state: e.target.value }))
           }}
@@ -245,6 +282,7 @@ export const Address = () => {
         Country
         <input
           type="text"
+          value={addressData.country}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, country: e.target.value }))
           }}
@@ -254,6 +292,7 @@ export const Address = () => {
         Mobile No.
         <input
           type="text"
+          value={addressData.mobile}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, mobile: e.target.value }))
           }}

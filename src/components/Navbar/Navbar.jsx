@@ -77,7 +77,7 @@ const Navbar = () => {
         <li
           className="navbar__link"
           onClick={() => {
-            handleClick('flower')
+            handleClick('flowers')
           }}
         >
           Flowers
@@ -97,7 +97,7 @@ const Navbar = () => {
 
         <li className="navbar__icon">
           {islogedin ? (
-            <Link to="/cart">
+            <Link to="/wishlist">
               <FiHeart size={18} />
             </Link>
           ) : (

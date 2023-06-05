@@ -16,35 +16,30 @@ function App() {
       {loader ? (
         <Lottie animationData={preloader} />
       ) : (
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<ProductPage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route
-              path="/wishlist"
-              element={
-                // <RequireAuth>
-                <WishList />
-                // </RequireAuth>
-              }
+        <>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<ProductPage />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/wishlist" element={<WishList />} />
+              <Route path="/profile" element={<Profile />}></Route>
+              <Route path="/auth" element={<Forms />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+            {/* <Forms /> */}
+            <Toaster
+              toastOptions={{
+                style: {
+                  fontSize: '1.5rem',
+                  fontWeight: '900',
+                },
+              }}
             />
-            <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/auth" element={<Forms />} />
-            <Route path="/checkout" element={<Checkout />} />
-          </Routes>
-          {/* <Forms /> */}
+          </div>
           <Footer />
-          <Toaster
-            toastOptions={{
-              style: {
-                fontSize: '1.5rem',
-                fontWeight: '900',
-              },
-            }}
-          />
-        </div>
+        </>
       )}
     </>
   )

@@ -9,20 +9,28 @@ import { AuthContext } from '../../context/AuthProvider'
 import { Address } from '../../components/Form/Forms'
 const Checkout = () => {
   const { modalOpen, close, open } = useModal()
-  const { addresss } = useContext(AuthContext)
+  const { addresss, userData } = useContext(AuthContext)
   const [selectedAddress, setSelectedAddress] = useState(0)
 
   const { cart } = useContext(CartContext)
   const PRICE = cart.reduce((acc, { price, count }) => count * price + acc, 0)
   const DELIVERY_CHARGE = 50
   const DISCOUNT = 10
-  console.log(addresss)
-  const deliveryAddress = addresss[selectedAddress] || { name: '' }
+  console.log(addresss, '<-- checkout address')
+  const deliveryAddress = userData.address[selectedAddress] ?? {
+    name: `Vikas Lodh`,
+    city: 'Toronto',
+    country: 'Latina',
+    pincode: '500012',
+    state: 'Ohio',
+    mobile: '8984418719',
+    street: '1987,Jerbai Wadia Road ',
+  }
   return (
     <section className="checkout">
       <div className="address">
         <h1 className="checkout__header"> Select Address </h1>
-        {addresss.map((ele, index) => {
+        {userData.address.map((ele, index) => {
           return (
             <label className="address__cart">
               <input
