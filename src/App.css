@@ -21,7 +21,7 @@ footer {
 }
 @media screen and (max-width: 500px) {
   .App {
-    margin-bottom: -150px;
+    /* margin-bottom: -150px; */
   }
 }
 #root {

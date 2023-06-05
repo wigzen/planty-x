@@ -7,7 +7,7 @@ const CartPrice = () => {
   const { cart } = useContext(CartContext)
   const PRICE = cart.reduce((acc, { price, count }) => count * price + acc, 0)
   const DELIVERY_CHARGE = 50
-  const DISCOUNT = 10
+  const DISCOUNT = PRICE * 0.1
   return (
     <div className="cart-pricing-card">
       <div className="pricing-card-title">
@@ -34,7 +34,7 @@ const CartPrice = () => {
       <div className="total-price">
         <div className="text">Total Amount</div>
         <div className="value">
-          &#8377; {PRICE + DELIVERY_CHARGE - DISCOUNT}
+          &#8377; {Math.round((PRICE + DELIVERY_CHARGE - DISCOUNT) * 100) / 100}
         </div>
       </div>
       <hr />

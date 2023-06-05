@@ -124,6 +124,7 @@
   font-weight: 500;
   font-size: 3rem;
   line-height: 1.2;
+  margin-bottom: 0.2em;
 }
 .small__heading {
   font-style: normal;
@@ -235,7 +236,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2em 0;
+  padding: 2em;
   flex-wrap: wrap;
 }
 ::placeholder {
