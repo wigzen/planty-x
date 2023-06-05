@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config/firebase'
 // import { data } from '../data'
-
+const CATEGORY = ['herbs', 'sprouts', 'bonsai', 'flowers', 'cactus']
 export const DataContext = createContext()
 const initailState = {
   query: '',
@@ -29,6 +29,7 @@ function reducer(state, action) {
       console.log(newCategory)
       return { ...state, categoryFilter: newCategory }
     case 'RATING':
+      console.log(action.payload)
       if (action.payload === 0) {
         return state
       }
@@ -74,6 +75,7 @@ const DataProvider = ({ children }) => {
           filters: state,
           products: data,
           loader,
+          CATEGORY,
         }}
       >
         {children}

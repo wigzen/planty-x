@@ -11,7 +11,7 @@ import { toast } from 'react-hot-toast'
 import { AuthContext } from '../../context/AuthProvider'
 
 const Product = () => {
-  const { products, filters, handleFilters } = useContext(DataContext)
+  const { products, filters, handleFilters, CATEGORY } = useContext(DataContext)
   const { cart, handleCart } = useContext(CartContext)
   const { wishList, handleWishList } = useContext(WishContext)
   const [currentProduct, setCurrentProduct] = useState({})
@@ -46,7 +46,7 @@ const Product = () => {
     // RATING START
     if (filters.ratingFilter !== '') {
       updatedData = updatedData.filter(
-        ({ ratings }) => ratings == filters.ratingFilter
+        ({ ratings }) => ratings >= filters.ratingFilter
       )
     }
     // RATING STOP
@@ -92,7 +92,7 @@ const Product = () => {
             name=""
             id=""
             min={0}
-            max={6}
+            max={5}
             value={range}
             onChange={(e) => {
               setRange((prev) => e.target.value)
@@ -121,54 +121,26 @@ const Product = () => {
           />
           Price Low to High
         </label>
-        <b> Level </b>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            onChange={() => {
-              handleFilters({ type: 'CATEGORY', payload: 'flowers' })
-            }}
-          />
-          Flowers
-        </label>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            onChange={() => {
-              handleFilters({ type: 'CATEGORY', payload: 'herbs' })
-            }}
-          />
-          Herbs
-        </label>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            onChange={() => {
-              handleFilters({ type: 'CATEGORY', payload: 'cactus' })
-            }}
-          />
-          Cactus
-        </label>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            onChange={() => {
-              handleFilters({ type: 'CATEGORY', payload: 'bonsai' })
-            }}
-          />
-          Bonsai
-        </label>
-        <label htmlFor="">
-          <input
-            type="checkbox"
-            onChange={() => {
-              handleFilters({ type: 'CATEGORY', payload: 'sprouts' })
-            }}
-          />
-          Sprouts
-        </label>
+        <b> Category </b>
+        {CATEGORY.map((ele) => {
+          return (
+            <>
+              <label>
+                <input
+                  type="checkbox"
+                  onChange={() => {
+                    handleFilters({ type: 'CATEGORY', payload: ele })
+                  }}
+                  checked={filters.categoryFilter.includes(ele)}
+                />
+                {ele.toUpperCase()}
+              </label>
+            </>
+          )
+        })}
       </div>
       <div className="item-contianer">
+        {/* {filteredData.length} */}
         {!filteredData ? (
           <p>loading</p>
         ) : (

@@ -21,17 +21,11 @@ const Navbar = () => {
   const { islogedin } = useContext(AuthContext)
   const navigate = useNavigate()
   function handleClick(type) {
-    handleFilters({ type: 'CATEGORY', payload: '' })
+    handleFilters({ type: 'RESET' })
     handleFilters({ type: 'CATEGORY', payload: type })
 
     navigate('/products')
   }
-  // const { modalOpen ,close ,open} = useModal()
-  // const {
-  //   modalOpen: isloginOpen,
-  //   close: loginClose,
-  //   open: loginOpen,
-  // } = useModal()
 
   return (
     <header className="navbar">
@@ -142,13 +136,6 @@ const Navbar = () => {
           {/* </Link> */}
         </li>
         <li className="navbar__icon mobile">
-          {/* <input
-            type="checkbox"
-            name="menu"
-            value="1"
-            id="menu"
-            className="menu__checkbox"
-          /> */}
           <label htmlFor="menu">
             <AiOutlineAlignRight size={18} />
           </label>

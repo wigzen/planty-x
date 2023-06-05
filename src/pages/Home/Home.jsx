@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Heroimg from '../../assets/reflected.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsArrowRightCircleFill } from 'react-icons/bs'
 import { AiFillStar } from 'react-icons/ai'
 import './home.css'
@@ -36,13 +36,21 @@ const bestSellers = [
   },
 ]
 const Home = () => {
+  const { handleFilters } = useContext(DataContext)
+  const navigate = useNavigate()
   return (
     <>
       <section className="hero">
         <div className="hero-text">
           <h1 className="hero-header">Best house plants varieties</h1>
-          <button className="btn">
-            <Link to="/products">Shop now</Link>
+          <button
+            className="btn"
+            onClick={() => {
+              handleFilters({ type: 'RESET' })
+              navigate('/products')
+            }}
+          >
+            Shop now
           </button>
           <div className="cta">
             <h3>Beautiful living greenery for homes and offices</h3>
