@@ -117,6 +117,7 @@ const SignUp = () => {
 
 const Login = () => {
   const notify = () => toast.success('Login Done')
+  const [showpassword, setShowpassword] = useState(false)
   // const navigate = useNavigate()
   const { handleLogin, loginDetails, setloginDetails } = useContext(AuthContext)
   return (
@@ -144,13 +145,26 @@ const Login = () => {
         Password
         <br />
         <input
-          type="password"
+          type={showpassword ? 'text' : 'password'}
           id="login__password"
           value={loginDetails.password}
           onChange={(e) => {
             setloginDetails((prev) => ({ ...prev, password: e.target.value }))
           }}
         />
+        {showpassword ? (
+          <AiOutlineEyeInvisible
+            size={16}
+            className="password__icon"
+            onClick={() => setShowpassword((prev) => !prev)}
+          />
+        ) : (
+          <AiOutlineEye
+            className="password__icon"
+            size={16}
+            onClick={() => setShowpassword((prev) => !prev)}
+          />
+        )}
       </label>
       <button className="btn" onClick={notify}>
         Submit
