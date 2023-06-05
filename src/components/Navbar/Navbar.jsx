@@ -40,11 +40,12 @@ const Navbar = () => {
           <img src={Logo} alt="logo" />
         </Link>
       </div>
+      <input type="checkbox" name="menu" id="menu" className="menu__checkbox" />
       <nav className="navbar__links">
         <li
           className="navbar__link"
           onClick={() => {
-            console.log('hehehe')
+            // console.log('hehehe')
             handleClick('bonsai')
           }}
         >
@@ -141,16 +142,18 @@ const Navbar = () => {
           {/* </Link> */}
         </li>
         <li className="navbar__icon mobile">
-          <AiOutlineAlignRight size={18} />
+          {/* <input
+            type="checkbox"
+            name="menu"
+            value="1"
+            id="menu"
+            className="menu__checkbox"
+          /> */}
+          <label htmlFor="menu">
+            <AiOutlineAlignRight size={18} />
+          </label>
         </li>
       </ul>
-      {/* {serachOpen && (
-        <Modal
-          modalOpen={serachOpen}
-          handleClose={close}
-          Component={<SearchBar handleClose={close} />}
-        ></Modal>
-      )} */}
 
       {serachOpen && (
         <Modal
