@@ -161,7 +161,7 @@ const AuthProvider = ({ children }) => {
           setIslogedIn(true)
           getData()
           console.log(userData.address, addresss, '<-- firebase addres')
-          setAddresss(userData.address ?? [])
+          setAddresss(userData.address || [])
           console.log({ uid, status: 'Logedin', user: user })
 
           // ...
@@ -171,9 +171,27 @@ const AuthProvider = ({ children }) => {
         }
       })
       // const token = localdb.getItem('tokenID')
-      getData()
     }
-  }, [userData, islogedin])
+    getData()
+  }, [])
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid
+        setIslogedIn(true)
+        // getData()
+        console.log(userData.address, addresss, '<-- firebase addres')
+        setAddresss(userData.address || [])
+        console.log({ uid, status: 'Logedin', user: user })
+
+        // ...
+      } else {
+        setIslogedIn(false)
+        console.log({ status: 'LogedOut' })
+      }
+    })
+  }, [userData])
   console.log(addresss, '<--address Auth')
 
   return (

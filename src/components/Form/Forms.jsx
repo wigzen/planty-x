@@ -233,7 +233,7 @@ export const Address = ({ ID, state, update }) => {
       onSubmit={(e) => {
         e.preventDefault()
 
-        if (update) {
+        if (update === true) {
           updateAddress(ID, addressData)
         } else {
           console.log(addressData)
@@ -241,7 +241,10 @@ export const Address = ({ ID, state, update }) => {
         }
       }}
     >
-      <h1 className="checkout__header"> Add New Address </h1>
+      <h1 className="checkout__header">
+        {' '}
+        {update ? 'Update Address' : 'Add New Address'}{' '}
+      </h1>
       <label>
         Name
         <input

@@ -34,7 +34,13 @@ const Navbar = () => {
           <img src={Logo} alt="logo" />
         </Link>
       </div>
-      <input type="checkbox" name="menu" id="menu" className="menu__checkbox" />
+      <input
+        type="checkbox"
+        name="menu"
+        id="menu"
+        // checked={t}
+        className="menu__checkbox"
+      />
       <nav className="navbar__links">
         <li
           className="navbar__link"

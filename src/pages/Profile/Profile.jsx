@@ -17,7 +17,7 @@ const Profile = () => {
     data: {},
   })
   const navigate = useNavigate()
-  useEffect(() => {}, [userData])
+  // useEffect(() => {}, [userData])
   console.log(addresss, '<--profile address')
   return (
     <section className="profile-section">
@@ -67,7 +67,7 @@ const Profile = () => {
             onClick={() => {
               setUpdateform(() => {
                 return {
-                  state: true,
+                  state: false,
                   ID: '',
                 }
               })
