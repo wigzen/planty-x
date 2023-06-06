@@ -17,7 +17,7 @@ const Checkout = () => {
   const DELIVERY_CHARGE = 50
   const DISCOUNT = PRICE * 0.1
   // console.log(addresss, '<-- checkout address')
-  const deliveryAddress = userData.address[selectedAddress] || {
+  const deliveryAddress = addresss[selectedAddress] || {
     name: `Vikas Lodh`,
     city: 'Toronto',
     country: 'Latina',
@@ -139,7 +139,7 @@ const Checkout = () => {
         <Modal
           modalOpen={modalOpen}
           handleClose={close}
-          Component={() => <Address />}
+          Component={() => <Address handleClose={close} />}
         />
       )}
     </section>
