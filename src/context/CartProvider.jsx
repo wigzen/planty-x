@@ -31,8 +31,8 @@ function reducer(state, action) {
       case 'DECREMENT':
         // console.log('decrement run')
         const newCart2 = state.map((item) =>
-          item._id === action.payload && item.count > 0
-            ? { ...item, count: item.count-- }
+          item._id === action.payload && item.count > 1
+            ? { ...item, count: item.count - 1 }
             : item
         )
         updateDoc(docRef, {
