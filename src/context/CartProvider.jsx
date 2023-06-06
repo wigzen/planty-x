@@ -3,6 +3,7 @@ import { AuthContext } from './AuthProvider'
 import { auth, db } from '../config/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore'
+import { toast } from 'react-hot-toast'
 export const CartContext = createContext()
 
 function reducer(state, action) {
@@ -24,21 +25,21 @@ function reducer(state, action) {
         updateDoc(docRef, {
           cart: [...newCart],
         })
+
         return newCart
+
       case 'DECREMENT':
-        {
-          // console.log('decrement run')
-          const newCart = state.map((item) =>
-            item._id === action.payload && item.count > 0
-              ? { ...item, count: item.count-- }
-              : item
-          )
-          updateDoc(docRef, {
-            cart: [...newCart],
-          })
-          return newCart
-        }
-        break
+        // console.log('decrement run')
+        const newCart2 = state.map((item) =>
+          item._id === action.payload && item.count > 0
+            ? { ...item, count: item.count-- }
+            : item
+        )
+        updateDoc(docRef, {
+          cart: [...newCart2],
+        })
+
+        return newCart2
 
       case 'ADD':
         updateDoc(docRef, {

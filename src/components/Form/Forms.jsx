@@ -245,46 +245,48 @@ export const Address = ({ ID, state, update }) => {
         {' '}
         {update ? 'Update Address' : 'Add New Address'}{' '}
       </h1>
-      <label>
-        Name
-        <input
-          type="text"
-          value={addressData.name}
-          onChange={(e) => {
-            setAddressData((prev) => ({ ...prev, name: e.target.value }))
-          }}
-        />
-      </label>
-      <label>
-        Street
-        <input
-          value={addressData.street}
-          type="text"
-          onChange={(e) => {
-            setAddressData((prev) => ({ ...prev, street: e.target.value }))
-          }}
-        />
-      </label>
-      <label>
-        City
-        <input
-          type="text"
-          value={addressData.city}
-          onChange={(e) => {
-            setAddressData((prev) => ({ ...prev, city: e.target.value }))
-          }}
-        />
-      </label>
-      <label>
-        Pincode
-        <input
-          type="text"
-          value={addressData.pincode}
-          onChange={(e) => {
-            setAddressData((prev) => ({ ...prev, pincode: e.target.value }))
-          }}
-        />
-      </label>
+      <div>
+        <label>
+          Name
+          <input
+            type="text"
+            value={addressData.name}
+            onChange={(e) => {
+              setAddressData((prev) => ({ ...prev, name: e.target.value }))
+            }}
+          />
+        </label>
+        <label>
+          Street
+          <input
+            value={addressData.street}
+            type="text"
+            onChange={(e) => {
+              setAddressData((prev) => ({ ...prev, street: e.target.value }))
+            }}
+          />
+        </label>
+        <label>
+          City
+          <input
+            type="text"
+            value={addressData.city}
+            onChange={(e) => {
+              setAddressData((prev) => ({ ...prev, city: e.target.value }))
+            }}
+          />
+        </label>
+        <label>
+          Pincode
+          <input
+            type="text"
+            value={addressData.pincode}
+            onChange={(e) => {
+              setAddressData((prev) => ({ ...prev, pincode: e.target.value }))
+            }}
+          />
+        </label>
+      </div>
       <label>
         State
         <input

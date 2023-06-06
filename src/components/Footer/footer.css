@@ -17,6 +17,7 @@
 .footer__logo {
   /* margin: 0 0.5em; */
   width: 100px;
+  cursor: pointer;
 }
 
 .footer__links,
@@ -25,6 +26,7 @@
 }
 .footer__icon,
 .footer__link {
+  cursor: pointer;
   padding: 0.5em 0;
   margin: 0.5em 1em;
 }

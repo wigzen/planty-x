@@ -141,8 +141,10 @@ const Product = () => {
       </div>
       <div className="item-contianer">
         {/* {filteredData.length} */}
-        {!filteredData ? (
-          <p>loading</p>
+        {!filteredData.length ? (
+          <div className="nodata">
+            <h1 className="nodata__header">NO Match Found</h1>
+          </div>
         ) : (
           filteredData.map((ele) => {
             return (

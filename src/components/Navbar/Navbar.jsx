@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import Logo from '../../assets/nav-logo.svg'
 import { FiSearch, FiUser, FiHeart } from 'react-icons/fi'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
@@ -13,6 +13,8 @@ import Forms from '../Form/Forms'
 import { DataContext } from '../../context/DataProvider'
 import { AuthContext } from '../../context/AuthProvider'
 import { toast } from 'react-hot-toast'
+// import { useClickOutside } from '@react-hookz/web'
+import { useClickOutside } from '../../hooks/useClickOutside'
 const Navbar = () => {
   const { modalOpen: serachOpen, close, open } = useModal()
   const [isSearch, setisSearch] = useState(false)
@@ -20,12 +22,18 @@ const Navbar = () => {
   const { handleFilters } = useContext(DataContext)
   const { islogedin } = useContext(AuthContext)
   const navigate = useNavigate()
+  const navlinkRef = useRef(null)
+
+  useClickOutside(navlinkRef, () => {
+    setOpenMenu(false)
+  })
   function handleClick(type) {
     handleFilters({ type: 'RESET' })
     handleFilters({ type: 'CATEGORY', payload: type })
 
     navigate('/products')
   }
+  const [openMenu, setOpenMenu] = useState(false)
 
   return (
     <header className="navbar">
@@ -34,14 +42,17 @@ const Navbar = () => {
           <img src={Logo} alt="logo" />
         </Link>
       </div>
-      <input
+      {/* <input
         type="checkbox"
         name="menu"
         id="menu"
         // checked={t}
         className="menu__checkbox"
-      />
-      <nav className="navbar__links">
+      /> */}
+      <nav
+        className={openMenu ? 'navbar__links--mobile' : 'navbar__links'}
+        ref={navlinkRef}
+      >
         <li
           className="navbar__link"
           onClick={() => {
@@ -142,9 +153,12 @@ const Navbar = () => {
           {/* </Link> */}
         </li>
         <li className="navbar__icon mobile">
-          <label htmlFor="menu">
-            <AiOutlineAlignRight size={18} />
-          </label>
+          {/* <label htmlFor="menu"> */}
+          <AiOutlineAlignRight
+            size={18}
+            onClick={() => setOpenMenu(!openMenu)}
+          />
+          {/* </label> */}
         </li>
       </ul>
 

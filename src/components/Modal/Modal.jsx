@@ -1,10 +1,11 @@
-import React, { Children, useContext, useState } from 'react'
+import React, { Children, useContext, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Backdrop from '../Backdrop/Backdrop'
 import { motion } from 'framer-motion'
 import { RxCrossCircled } from 'react-icons/rx'
 import './modal.css'
 import { DataContext } from '../../context/DataProvider'
+import { useClickOutside } from '../../hooks/useClickOutside'
 const Modal = ({ handleClose, children, Component }) => {
   const zoom = {
     hidden: {
@@ -24,14 +25,16 @@ const Modal = ({ handleClose, children, Component }) => {
       opacity: 0,
     },
   }
-  const { handleFilters } = useContext(DataContext)
-  const [query, setQuery] = useState('')
-  const navigate = useNavigate()
-  console.log(Component)
-
+  // const { handleFilters } = useContext(DataContext)
+  // const [query, setQuery] = useState('')
+  // const navigate = useNavigate()
+  // console.log(Component)
+  const modalRef = useRef(null)
+  useClickOutside(modalRef, handleClose)
   return (
     <Backdrop>
       <motion.div
+        ref={modalRef}
         onClick={(e) => {
           e.stopPropagation()
         }}
@@ -43,29 +46,7 @@ const Modal = ({ handleClose, children, Component }) => {
       >
         <div className="flex__contianer">
           {Component()}
-          {/* {children} */}
-          {/* <input
-            type="text"
-            className="search__bar"
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value)
-            }}
-          />
-          <div>
-            <button
-              className="btn"
-              onClick={() => {
-                handleFilters({ type: 'SEARCH', payload: query })
-                navigate('/products')
-                handleClose()
-              }}
-            >
-              {' '}
-              Search{' '}
-            </button>
-         
-          </div> */}
+
           <RxCrossCircled
             onClick={handleClose}
             size={'2rem'}
