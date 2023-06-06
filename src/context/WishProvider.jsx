@@ -13,7 +13,7 @@ function reducer(state, action) {
         console.log(action.payload)
         return action.payload
       case 'ADD':
-        if (state.find((ele) => ele.id === action.payload.id)) {
+        if (state.find((ele) => ele._id === action.payload._id)) {
           return state
         }
         updateDoc(docRef, {

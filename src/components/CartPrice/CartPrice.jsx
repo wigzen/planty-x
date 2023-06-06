@@ -19,15 +19,19 @@ const CartPrice = () => {
           <div className="text">
             Price (<span> {cart.length}</span> <span>items</span>)
           </div>
-          <div className="value">&#8377; {PRICE}</div>
+          <div className="value">&#8377; {Math.round(PRICE * 100) / 100}</div>
         </div>
         <div className="price">
           <div className="text">Discount</div>
-          <div className="value">- &#8377; {DISCOUNT}</div>
+          <div className="value">
+            - &#8377; {Math.round(DISCOUNT * 100) / 100}
+          </div>
         </div>
         <div className="price">
           <div className="text">Delivery Charges</div>
-          <div className="value">&#8377; {DELIVERY_CHARGE}</div>
+          <div className="value">
+            &#8377; {Math.round(DELIVERY_CHARGE * 100) / 100}
+          </div>
         </div>
       </div>
       <hr />

@@ -14,11 +14,6 @@ import { toast } from 'react-hot-toast'
 const Cart = () => {
   const { cart, handleCart } = useContext(CartContext)
   const { wishList, handleWishList } = useContext(WishContext)
-
-  // const price = cart.reduce((acc, { price, count }) => {
-  //   return price * count + acc
-  // }, 0)
-  // const discount = 0
   const { islogedin } = useContext(AuthContext)
   // console.log(cart)
   return (
@@ -93,9 +88,10 @@ const Cart = () => {
                     {/* <br /> */}
                     {!wishList.find((item) => item._id === ele._id) ? (
                       <button
-                        onClick={() => {
+                        onClick={(e) => {
                           handleWishList({ type: 'ADD', payload: ele })
                           handleCart({ type: 'REMOVE', payload: ele })
+                          e.stopPropagation()
                         }}
                         className="cart_card__btn"
                       >

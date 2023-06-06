@@ -208,12 +208,11 @@ const Product = () => {
                     <button
                       onClick={(e) => {
                         if (islogedin) {
+                          e.stopPropagation()
                           handleWishList({ type: 'ADD', payload: ele })
                           toast.success(' Added to WishList ')
-                          e.stopPropagation()
                         } else {
                           e.stopPropagation()
-
                           toast.error('Please Login')
                         }
                       }}

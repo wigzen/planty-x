@@ -16,7 +16,7 @@ const Checkout = () => {
   const PRICE = cart.reduce((acc, { price, count }) => count * price + acc, 0)
   const DELIVERY_CHARGE = 50
   const DISCOUNT = PRICE * 0.1
-  console.log(addresss, '<-- checkout address')
+  // console.log(addresss, '<-- checkout address')
   const deliveryAddress = userData.address[selectedAddress] ?? {
     name: `Vikas Lodh`,
     city: 'Toronto',
@@ -66,9 +66,6 @@ const Checkout = () => {
       <div className="order">
         <div className="checkout-card">
           <div className="cart-pricing-card">
-            {/* <div className="pricing-card-title">
-              <h2>Price Details</h2>
-            </div> */}
             <h3 className="checkout-card__heading">Order Summary</h3>
             <hr />
             {cart.map((ele) => {
@@ -78,7 +75,9 @@ const Checkout = () => {
                     {ele.name} (<span> {ele.price}</span> X
                     <span>{ele.count}</span>)
                   </div>
-                  <div className="value">&#8377; {ele.price * ele.count}</div>
+                  <div className="value">
+                    &#8377; {Math.round(ele.price * ele.count * 100) / 100}
+                  </div>
                 </div>
               )
             })}
@@ -88,15 +87,21 @@ const Checkout = () => {
                 <div className="text">
                   Price (<span> {cart.length}</span> <span>items</span>)
                 </div>
-                <div className="value">&#8377; {PRICE}</div>
+                <div className="value">
+                  &#8377; {Math.round(PRICE * 100) / 100}
+                </div>
               </div>
               <div className="price">
                 <div className="text">Discount</div>
-                <div className="value">- &#8377; {DISCOUNT}</div>
+                <div className="value">
+                  - &#8377; {Math.round(DISCOUNT * 100) / 100}
+                </div>
               </div>
               <div className="price">
                 <div className="text">Delivery Charges</div>
-                <div className="value">&#8377; {DELIVERY_CHARGE}</div>
+                <div className="value">
+                  &#8377; {Math.round(DELIVERY_CHARGE * 100) / 100}
+                </div>
               </div>
             </div>
             <hr />

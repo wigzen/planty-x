@@ -17,6 +17,7 @@ const Wishlist = () => {
       handleCart({ type: 'ADD', payload: newItem })
     }
   }
+  console.log(wishList)
   return (
     <>
       <h1 className="page-header"> Wishlist</h1>
