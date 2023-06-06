@@ -32,20 +32,20 @@ const AuthProvider = ({ children }) => {
 
   const [addresss, setAddresss] = useState([])
   async function handleLogin(e) {
-    e.preventDefault()
+    // e.preventDefault()
     try {
       const response = await signInWithEmailAndPassword(
         auth,
         loginDetails.email,
         loginDetails.password
       )
-      // console.log(response)
-      // localdb.setItem('tokenID', response._tokenResponse.idToken)
 
-      //   console.log(Auth?.currentUser)
       setIslogedIn(true)
+      toast.success('Login Done')
       getData()
     } catch (err) {
+      toast.error(err.code)
+
       console.log(err.code)
     }
   }

@@ -28,6 +28,7 @@ const SignUp = () => {
         First Name
         <br />
         <input
+          required
           type="text"
           onChange={(e) => {
             setsignupDetails((prev) => ({ ...prev, firstName: e.target.value }))
@@ -39,6 +40,7 @@ const SignUp = () => {
         Last Name
         <br />
         <input
+          required
           type="text"
           onChange={(e) => {
             setsignupDetails((prev) => ({ ...prev, lastName: e.target.value }))
@@ -48,6 +50,7 @@ const SignUp = () => {
       <label htmlFor="login__email">
         E-mail <br />
         <input
+          required
           type="email"
           id="login__email"
           value={signupDetails.email}
@@ -60,6 +63,7 @@ const SignUp = () => {
         Password
         <br />
         <input
+          required
           type={showpassword ? 'text' : 'password'}
           id="login__password"
           value={signupDetails.password}
@@ -85,6 +89,7 @@ const SignUp = () => {
         Confirm Password
         <br />
         <input
+          required
           type={showpassword ? 'text' : 'password'}
           // id="login__password"
           value={signupDetails.password}
@@ -116,7 +121,6 @@ const SignUp = () => {
 }
 
 const Login = () => {
-  const notify = () => toast.success('Login Done')
   const [showpassword, setShowpassword] = useState(false)
   // const navigate = useNavigate()
   const { handleLogin, loginDetails, setloginDetails } = useContext(AuthContext)
@@ -124,7 +128,14 @@ const Login = () => {
     <form
       className="form"
       onSubmit={
-        handleLogin
+        (e) => {
+          e.preventDefault()
+          handleLogin()
+          setloginDetails({
+            email: '',
+            password: '',
+          })
+        }
         // navigate('/')
       }
     >
@@ -133,6 +144,7 @@ const Login = () => {
         E-mail
         <br />
         <input
+          required
           type="email"
           id="login__email"
           value={loginDetails.email}
@@ -145,6 +157,7 @@ const Login = () => {
         Password
         <br />
         <input
+          required
           type={showpassword ? 'text' : 'password'}
           id="login__password"
           value={loginDetails.password}
@@ -166,9 +179,7 @@ const Login = () => {
           />
         )}
       </label>
-      <button className="btn" onClick={notify}>
-        Submit
-      </button>
+      <button className="btn">Submit</button>
       <p
         role="button"
         type="submit"
@@ -214,7 +225,7 @@ const Forms = () => {
 }
 
 export default Forms
-export const Address = ({ ID, state, update }) => {
+export const Address = ({ ID, state, update, handleClose }) => {
   const { addAddress, updateAddress } = useContext(AuthContext)
   const [addressData, setAddressData] = useState(
     state ?? {
@@ -239,6 +250,7 @@ export const Address = ({ ID, state, update }) => {
           console.log(addressData)
           addAddress(addressData)
         }
+        handleClose()
       }}
     >
       <h1 className="checkout__header">
@@ -249,6 +261,7 @@ export const Address = ({ ID, state, update }) => {
         <label>
           Name
           <input
+            required
             type="text"
             value={addressData.name}
             onChange={(e) => {
@@ -259,6 +272,7 @@ export const Address = ({ ID, state, update }) => {
         <label>
           Street
           <input
+            required
             value={addressData.street}
             type="text"
             onChange={(e) => {
@@ -269,6 +283,7 @@ export const Address = ({ ID, state, update }) => {
         <label>
           City
           <input
+            required
             type="text"
             value={addressData.city}
             onChange={(e) => {
@@ -279,7 +294,10 @@ export const Address = ({ ID, state, update }) => {
         <label>
           Pincode
           <input
-            type="text"
+            required
+            type="number"
+            maxLength={6}
+            pattern="[0-9]"
             value={addressData.pincode}
             onChange={(e) => {
               setAddressData((prev) => ({ ...prev, pincode: e.target.value }))
@@ -290,6 +308,7 @@ export const Address = ({ ID, state, update }) => {
       <label>
         State
         <input
+          required
           type="text"
           value={addressData.state}
           onChange={(e) => {
@@ -300,6 +319,7 @@ export const Address = ({ ID, state, update }) => {
       <label>
         Country
         <input
+          required
           type="text"
           value={addressData.country}
           onChange={(e) => {
@@ -310,8 +330,10 @@ export const Address = ({ ID, state, update }) => {
       <label>
         Mobile No.
         <input
-          type="text"
+          required
+          type="number"
           value={addressData.mobile}
+          maxLength={10}
           onChange={(e) => {
             setAddressData((prev) => ({ ...prev, mobile: e.target.value }))
           }}

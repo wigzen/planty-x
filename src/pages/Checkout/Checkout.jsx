@@ -17,7 +17,7 @@ const Checkout = () => {
   const DELIVERY_CHARGE = 50
   const DISCOUNT = PRICE * 0.1
   // console.log(addresss, '<-- checkout address')
-  const deliveryAddress = userData.address[selectedAddress] ?? {
+  const deliveryAddress = userData.address[selectedAddress] || {
     name: `Vikas Lodh`,
     city: 'Toronto',
     country: 'Latina',
@@ -30,12 +30,13 @@ const Checkout = () => {
     <section className="checkout">
       <div className="address">
         <h1 className="checkout__header"> Select Address </h1>
-        {userData.address.map((ele, index) => {
+        {addresss.map((ele, index) => {
           return (
             <label className="address__cart">
               <input
                 type="radio"
                 name="address"
+                checked={index == selectedAddress ? true : false}
                 value={index}
                 onChange={() => {
                   setSelectedAddress(index)
